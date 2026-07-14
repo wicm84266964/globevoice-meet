@@ -1,5 +1,5 @@
 websockets
-google-common-protos
+googleapis-common-protos
 protobuf
 pyaudio
 numpy

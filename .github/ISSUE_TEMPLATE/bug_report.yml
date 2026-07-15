@@ -1,0 +1,68 @@
+name: Bug report
+description: Report a reproducible GlobeVoice Meet problem
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use a minimal example. Remove APP IDs, access tokens, meeting audio, transcripts, participant details, environment files, and personal information.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: "For example: v1.0.0 or abc1234"
+    validations:
+      required: true
+  - type: dropdown
+    id: operating-system
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Runtime environment
+      description: Include app installation method, Python and Node.js versions, and audio device type when relevant.
+      placeholder: "Windows 11, source install, Python 3.12, Node.js 22"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Provide the smallest reliable sequence using synthetic text or audio.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Redacted logs
+      description: Include only the minimum relevant lines after removing credentials and meeting content.
+      render: shell
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmations
+      options:
+        - label: I searched existing issues for the same problem.
+          required: true
+        - label: I removed credentials, meeting audio, transcripts, participant details, and personal information.
+          required: true

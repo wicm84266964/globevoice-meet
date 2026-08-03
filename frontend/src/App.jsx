@@ -21,7 +21,9 @@ function App() {
   const [showDeviceSettings, setShowDeviceSettings] = useState(false);
   const [isServiceRunning, setIsServiceRunning] = useState(false);
   const [alwaysOnTopEnabled, setAlwaysOnTopEnabled] = useState(false);
-  const [alwaysOnTopSupported, setAlwaysOnTopSupported] = useState(false);
+  const [alwaysOnTopSupported, setAlwaysOnTopSupported] = useState(() =>
+    Boolean(window.electronAPI?.getAlwaysOnTop && window.electronAPI?.setAlwaysOnTop),
+  );
   const [isAlwaysOnTopUpdating, setIsAlwaysOnTopUpdating] = useState(false);
   const [isSubtitleFocusMode, setIsSubtitleFocusMode] = useState(false);
   const [isSubtitleFocusModeUpdating, setIsSubtitleFocusModeUpdating] = useState(false);
@@ -45,11 +47,8 @@ function App() {
     const electronAPI = window.electronAPI;
 
     if (!electronAPI?.getAlwaysOnTop || !electronAPI?.setAlwaysOnTop) {
-      setAlwaysOnTopSupported(false);
       return undefined;
     }
-
-    setAlwaysOnTopSupported(true);
 
     void electronAPI.getAlwaysOnTop()
       .then((enabled) => {

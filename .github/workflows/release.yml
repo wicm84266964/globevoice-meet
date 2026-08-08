@@ -52,6 +52,11 @@ jobs:
           VERSION: ${{ inputs.version }}
           PRERELEASE: ${{ inputs.prerelease }}
         run: |
-          args=("$VERSION" --target "$GITHUB_SHA" --title "$VERSION" --generate-notes)
+          notes_file="docs/releases/$VERSION.md"
+          if [[ ! -s "$notes_file" ]]; then
+            echo "A reviewed release note is required at $notes_file." >&2
+            exit 1
+          fi
+          args=("$VERSION" --target "$GITHUB_SHA" --title "$VERSION" --notes-file "$notes_file")
           [[ "$PRERELEASE" != "true" ]] || args+=(--prerelease)
           gh release create "${args[@]}"
